@@ -19,7 +19,7 @@
 ##
 ##IF YOU GET A POOR FIT FOR SOME DATA, ONE ITEM TO REVIEW IS COMPARISON OF THE PARAMETER ESTIMATES TO THE STARTING PARAMETER DISTRIBUTIONS (MAY NEED TO SIMPLY EXPAND OR CHANGE THE BOUNDS OF AN INPUT)
 ##
-##FOR MORE INFO ON THE SPMMS MODEL, SEE: Wilson, T. (2010). ìModel migration schedules incorporating student migration peaks.î Demographic Research, 23(8): 191ñ222.
+##FOR MORE INFO ON THE SPMMS MODEL, SEE: Wilson, T. (2010). ‚ÄúModel migration schedules incorporating student migration peaks.‚Äù Demographic Research, 23(8): 191‚Äì222.
 ##AVAILABLE ONLINE: https://www.demographic-research.org/Volumes/Vol23/8/default.htm
 ##RELATED EXCEL WORKBOOK BY TOM WILSON: http://www.demog.berkeley.edu/~eddieh/toolbox.html#SPMMS (MANY THANKS TO TOM WILSON FOR SHARING IT - A TERRIFIC RESOURCE AND GUIDE)
 ##(NOTE BELOW HAS PARAMETERS SET TO RUN ALL STEPS AS DEFAULT BUT THE EXCEL WORKBOOK HAS ELDERLY STEP TURNED OFF AS DEFAULT)

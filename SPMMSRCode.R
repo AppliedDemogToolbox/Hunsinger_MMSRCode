@@ -1,7 +1,7 @@
 ##############################################################################################################################
 ##EDDIE'S R CODE FOR FITTING THE MODEL MIGRATION SCHEDULE WITH STUDENT PEAK
 ##
-##EDDIE HUNSINGER, AUGUST 2018 (LAST UPDATED OCTOBER 2018)
+##EDDIE HUNSINGER, AUGUST 2018 (LAST UPDATED DECEMBER 2018)
 ##http://www.demog.berkeley.edu/~eddieh/
 ##
 ##IF YOU WOULD LIKE TO USE, SHARE OR REPRODUCE THIS CODE, BE SURE TO CITE THE SOURCE
@@ -18,6 +18,9 @@
 ##PLEASE FEEL ENCOURAGED TO TEST OUT DIFFERENT SETTINGS, OF COURSE
 ##
 ##IF YOU GET A POOR FIT FOR SOME DATA, ONE ITEM TO REVIEW IS COMPARISON OF THE PARAMETER ESTIMATES TO THE STARTING PARAMETER DISTRIBUTIONS (MAY NEED TO SIMPLY EXPAND OR CHANGE THE BOUNDS OF AN INPUT)
+##
+##COPIES WITH SOME APPLICATION OF AND COMPARISON TO R's lm() AND nls() FUNCTIONS, AND TO ~PLAIN MONTE CARLO, 
+##ARE AVAILABLE AT https://github.com/AppliedDemogToolbox/Hunsinger_SPMMSRCode/tree/master/FittingComparisons
 ##
 ##FOR MORE INFO ON THE SPMMS MODEL, SEE: Wilson, T. (2010). “Model migration schedules incorporating student migration peaks.” Demographic Research, 23(8): 191–222.
 ##AVAILABLE ONLINE: https://www.demographic-research.org/Volumes/Vol23/8/default.htm
@@ -37,7 +40,7 @@
 
 ###############
 #DATA FROM WILSON (2010)
-SPMMSTestingData<-read.table(file="http://www.demog.berkeley.edu/~eddieh/AppliedDemographyToolbox/SPMMSRCode/SPMMSData.csv",header=TRUE,sep=",")
+SPMMSTestingData<-read.table(file="https://github.com/AppliedDemogToolbox/Hunsinger_SPMMSRCode/raw/master/SPMMSData.csv",header=TRUE,sep=",")
 migprob<-(SPMMSTestingData$Migration.probability[1:90])
 
 #SIZE OF migprob (DATA BY AGE) USED
@@ -71,10 +74,10 @@ childmin<-0
 childmax<-16
 
 #HEIGHT OF THE CHILDHOOD CURVE
-#NO STARTING INPUT NEEDED - FIT BY LINEAR MODEL ON TRANSFORMATION
+childparam1tries<-array(runif(ITER,0,.1))
 
 #RATE OF DESCENT OF THE CHILDHOOD CURVE
-#NO STARTING INPUT NEEDED - FIT BY LINEAR MODEL ON TRANSFORMATION
+childparam2tries<-array(runif(ITER,0,1))
 ###############
 
 ###############
@@ -173,15 +176,34 @@ ages<-c(0:(length(step1)-1))
 meanages<-c(0+1:length(step1))
 
 ##STEP 3 FIT - SLOPE AND INTERCEPT FOR TRANSFORMATION
-#THIS IS R's lm() FUNCTION FIT
-step3<-array(,childmax-childmin)
-for (i in 1:length(step3)) {step3[i]<-log(step1[i]-step2[i])}
-meanchildmin<-childmin+1
-childages<-c(childmin+1:childmax)
-childfit<-lm(step3~childages)
-childfit
-for (i in 1:length(ages)) {step3[i]<-exp(childfit$coefficients[1])*exp(-(-childfit$coefficients[2])*meanages[i])}
-step3<-step2+step3
+#THIS IS DIRECTLY ESTIMATED FIT - I COMMENTED OUT AND DID BY SAMPLING TO MAKE CONSISTENT WITH STEPS 4 THROUGH 7
+#step3<-array(,childmax-childmin)
+#for (i in 1:length(step3)) {step3[i]<-log(step1[i]-step2[i])}
+#meanchildmin<-childmin+1
+#childages<-c(childmin+1:childmax)
+#childfit<-lm(step3~childages)
+#for (i in 1:length(ages)) {step3[i]<-exp(childfit$coefficients[1])*exp(-(-childfit$coefficients[2])*meanages[i])}
+#step3<-step2+step3
+
+##STEP 3 FIT - SELECT BEST PERCENT PARAMETER VALUES OF ITER BASED ON INPUT DISTRIBUTIONS, THEN REPEAT ITER WITH THE UNIFORM BOUNDS OF BEST PERCENT AND SELECT BEST PARAMETER VALUES 
+step3tries<-array(step1-step2,dim=c(length(step1),ITER))
+for (i in 1:ITER) {step3tries[1:SIZE,i]<-childparam1tries[i]*exp(-childparam2tries[i]*(meanages[]))}
+childresidtries<-array(0,dim=c(length(step1),ITER))
+for (i in 1:ITER) {for (j in 1:length(meanages)) {if((meanages[j]>=childmin)&(meanages[j]<=childmax)) {childresidtries[j,i]<-(step3tries[j,i]-(step1-step2)[j])^2}}}
+sumchildresidtries<-array(,ITER)
+for (i in 1:ITER) {sumchildresidtries[i]<-sum(childresidtries[,i])}
+childparam1triesnew<-runif(ITER,min(childparam1tries[match(head(sort(sumchildresidtries),ITER*BEST),sumchildresidtries)]), max(childparam1tries[match(head(sort(sumchildresidtries),ITER*BEST),sumchildresidtries)]))
+childparam2triesnew<-runif(ITER,min(childparam2tries[match(head(sort(sumchildresidtries),ITER*BEST),sumchildresidtries)]), max(childparam2tries[match(head(sort(sumchildresidtries),ITER*BEST),sumchildresidtries)]))
+step3tries<-array(step1-step2,dim=c(length(step1),ITER))
+for (i in 1:ITER) {step3tries[1:SIZE,i]<-childparam1triesnew[i]*exp(-childparam2triesnew[i]*(meanages[]))}
+childresidtries<-array(0,dim=c(length(step1),ITER))
+for (i in 1:ITER) {for (j in 1:length(meanages)) {if((meanages[j]>=childmin)&(meanages[j]<=childmax)) {childresidtries[j,i]<-(step3tries[j,i]-(step1-step2)[j])^2}}}
+sumchildresidtries<-array(,ITER)
+for (i in 1:ITER) {sumchildresidtries[i]<-sum(childresidtries[,i])}
+childparam1triesnew[which(sumchildresidtries==min(sumchildresidtries))]
+childparam2triesnew[which(sumchildresidtries==min(sumchildresidtries))]
+sumchildresidtries[which(sumchildresidtries==min(sumchildresidtries))]
+step3<-step2+step3tries[,which(sumchildresidtries==min(sumchildresidtries))]
 
 ##STEP 4 FIT - SELECT BEST PERCENT PARAMETER VALUES OF ITER BASED ON INPUT DISTRIBUTIONS, THEN REPEAT ITER WITH THE UNIFORM BOUNDS OF BEST PERCENT UNTIL CONVERGENCE  
 step4triesfit<-function(labparam1tries,labparam2tries,labparam3tries,labparam4tries){

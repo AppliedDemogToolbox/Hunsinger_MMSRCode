@@ -2,7 +2,7 @@
 ##AN R CODE ADAPTATION OF TOM WILSON'S SPMMS
 ##(ROGERS AND CASTRO MODEL MIGRATION WITH STUDENT PEAK)
 ##
-##EDDIE HUNSINGER, AUGUST 2018 (UPDATED AUGUST 20, 2018)
+##EDDIE HUNSINGER, AUGUST 2018 (UPDATED DECEMBER 2018)
 ##http://www.demog.berkeley.edu/~eddieh/
 ##
 ##IF YOU WOULD LIKE TO USE, SHARE OR REPRODUCE THIS CODE, BE SURE TO CITE THE SOURCE
@@ -32,7 +32,7 @@
 
 ###############
 #DATA
-SPMMSTestingData<-read.table(file="http://www.demog.berkeley.edu/~eddieh/AppliedDemographyToolbox/SPMMSRCode/SPMMSData.csv",header=TRUE,sep=",")
+SPMMSTestingData<-read.table(file="https://github.com/AppliedDemogToolbox/Hunsinger_SPMMSRCode/raw/master/SPMMSData.csv",header=TRUE,sep=",")
 migprob<-(SPMMSTestingData$Migration.probability[1:90])
 
 #SIZE OF migprob (DATA BY AGE) USED

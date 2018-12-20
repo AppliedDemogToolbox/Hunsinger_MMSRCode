@@ -11,10 +11,10 @@
 ##This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. More information: https://creativecommons.org/licenses/by-nc-sa/4.0/? 
 ##
 ##INFO AND SOURCES ON THE MODEL
-##Wilson, T. (2010). ìModel Migration Schedules Incorporating Student Migration Peaks.î Demographic Research, 23(8): 191ñ222.
+##Wilson, T. (2010). ‚ÄúModel Migration Schedules Incorporating Student Migration Peaks.‚Äù Demographic Research, 23(8): 191‚Äì222.
 ##	Available online: https://www.demographic-research.org/volumes/vol23/8/default.htm 
 ##	Related Excel Workbook by Tom Wilson: http://www.demog.berkeley.edu/~eddieh/toolbox.html#spmms  
-##Rogers A & Castro LJ (1981). ìModel Migration Schedules.î IIASA Research Report. IIASA, Laxenburg, Austria: RR-81-030
+##Rogers A & Castro LJ (1981). ‚ÄúModel Migration Schedules.‚Äù IIASA Research Report. IIASA, Laxenburg, Austria: RR-81-030
 ##	Available online: http://pure.iiasa.ac.at/id/eprint/1543/  
 ##############################################################################################################################
 

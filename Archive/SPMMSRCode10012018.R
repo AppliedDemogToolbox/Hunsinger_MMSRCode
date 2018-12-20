@@ -1,7 +1,7 @@
 ##############################################################################################################################
 ##EDDIE'S R CODE FOR FITTING THE MODEL MIGRATION SCHEDULE WITH STUDENT PEAK
 ##
-##EDDIE HUNSINGER, AUGUST 2018 (NOTES UPDATED SEPTEMBER 2018)
+##EDDIE HUNSINGER, AUGUST 2018 (UPDATED DECEMBER 2018)
 ##http://www.demog.berkeley.edu/~eddieh/
 ##
 ##IF YOU WOULD LIKE TO USE, SHARE OR REPRODUCE THIS CODE, BE SURE TO CITE THE SOURCE
@@ -15,7 +15,7 @@
 ##THE RANGES FOR THIS EXAMPLE ARE AROUND EXISTING INFO FROM ROGERS-CASTRO AND WILSON, AND NOT CAREFULLY FIGURED OR CALIBRATED - PLEASE FEEL ENCOURAGED TO TEST OUT DIFFERENT SETTINGS THOUGH, OF COURSE
 ##IF YOU GET A POOR FIT FOR SOME DATA, ONE ITEM TO REVIEW IS COMPARISON OF THE PARAMETER ESTIMATES TO THE INPUT PARAMETER RANGES (MAY NEED TO SIMPLY EXPAND OR CHANGE THE BOUNDS OF AN INPUT)
 ##
-##FOR MORE INFO ON THE SPMMS MODEL, SEE: Wilson, T. (2010). ìModel migration schedules incorporating student migration peaks.î Demographic Research, 23(8): 191ñ222.
+##FOR MORE INFO ON THE SPMMS MODEL, SEE: Wilson, T. (2010). ‚ÄúModel migration schedules incorporating student migration peaks.‚Äù Demographic Research, 23(8): 191‚Äì222.
 ##AVAILABLE ONLINE: https://www.demographic-research.org/Volumes/Vol23/8/default.htm
 ##RELATED EXCEL WORKBOOK BY TOM WILSON: http://www.demog.berkeley.edu/~eddieh/toolbox.html#SPMMS 
 ##(NOTE BELOW HAS PARAMETERS SET TO RUN ALL STEPS AS DEFAULT BUT THE EXCEL WORKBOOK HAS ELDERLY STEP TURNED OFF AS DEFAULT)
@@ -33,7 +33,7 @@
 
 ###############
 #DATA
-SPMMSTestingData<-read.table(file="http://www.demog.berkeley.edu/~eddieh/AppliedDemographyToolbox/SPMMSRCode/SPMMSData.csv",header=TRUE,sep=",")
+SPMMSTestingData<-read.table(file="https://github.com/AppliedDemogToolbox/Hunsinger_SPMMSRCode/raw/master/SPMMSData.csv",header=TRUE,sep=",")
 migprob<-(SPMMSTestingData$Migration.probability[1:90])
 
 #SIZE OF migprob (DATA BY AGE) USED

@@ -16,7 +16,7 @@
 ##NOTE: I AIMED TO KEEP THE RANGES NAIVE FOR THIS EXAMPLE, AROUND EXISTING INFO FROM ROGERS, CASTRO, AND WILSON
 ##IMPORTANT: IT'S NOT SET UP TO FULLY OR RELIABLY CONVERGE, SO THE PARAMETER ESTIMATES FROM IT ARE NOT QUITE STABLE
 ##
-##FOR MORE INFO ON THE SPMMS MODEL, SEE: Wilson, T. (2010). ìModel migration schedules incorporating student migration peaks.î Demographic Research, 23(8): 191ñ222.
+##FOR MORE INFO ON THE SPMMS MODEL, SEE: Wilson, T. (2010). ‚ÄúModel migration schedules incorporating student migration peaks.‚Äù Demographic Research, 23(8): 191‚Äì222.
 ##AVAILABLE ONLINE: https://www.demographic-research.org/Volumes/Vol23/8/default.htm
 ##
 ##RELATED EXCEL WORKBOOK BY TOM WILSON: http://www.demog.berkeley.edu/~eddieh/toolbox.html#SPMMS 

@@ -186,24 +186,29 @@ meanages<-c(0+1:length(step1))
 #step3<-step2+step3
 
 ##STEP 3 FIT - SELECT BEST PERCENT PARAMETER VALUES OF ITER BASED ON INPUT DISTRIBUTIONS, THEN REPEAT ITER WITH THE UNIFORM BOUNDS OF BEST PERCENT AND SELECT BEST PARAMETER VALUES 
+step3triesfit<-function(childparam1tries,childparam2tries){
 step3tries<-array(step1-step2,dim=c(length(step1),ITER))
 for (i in 1:ITER) {step3tries[1:SIZE,i]<-childparam1tries[i]*exp(-childparam2tries[i]*(meanages[]))}
 childresidtries<-array(0,dim=c(length(step1),ITER))
 for (i in 1:ITER) {for (j in 1:length(meanages)) {if((meanages[j]>=childmin)&(meanages[j]<=childmax)) {childresidtries[j,i]<-(step3tries[j,i]-(step1-step2)[j])^2}}}
 sumchildresidtries<-array(,ITER)
 for (i in 1:ITER) {sumchildresidtries[i]<-sum(childresidtries[,i])}
-childparam1triesnew<-runif(ITER,min(childparam1tries[match(head(sort(sumchildresidtries),ITER*BEST),sumchildresidtries)]), max(childparam1tries[match(head(sort(sumchildresidtries),ITER*BEST),sumchildresidtries)]))
-childparam2triesnew<-runif(ITER,min(childparam2tries[match(head(sort(sumchildresidtries),ITER*BEST),sumchildresidtries)]), max(childparam2tries[match(head(sort(sumchildresidtries),ITER*BEST),sumchildresidtries)]))
-step3tries<-array(step1-step2,dim=c(length(step1),ITER))
-for (i in 1:ITER) {step3tries[1:SIZE,i]<-childparam1triesnew[i]*exp(-childparam2triesnew[i]*(meanages[]))}
-childresidtries<-array(0,dim=c(length(step1),ITER))
-for (i in 1:ITER) {for (j in 1:length(meanages)) {if((meanages[j]>=childmin)&(meanages[j]<=childmax)) {childresidtries[j,i]<-(step3tries[j,i]-(step1-step2)[j])^2}}}
-sumchildresidtries<-array(,ITER)
-for (i in 1:ITER) {sumchildresidtries[i]<-sum(childresidtries[,i])}
-childparam1triesnew[which(sumchildresidtries==min(sumchildresidtries))]
-childparam2triesnew[which(sumchildresidtries==min(sumchildresidtries))]
-sumchildresidtries[which(sumchildresidtries==min(sumchildresidtries))]
-step3<-step2+step3tries[,which(sumchildresidtries==min(sumchildresidtries))]
+childparam1tries<-runif(ITER,min(childparam1tries[match(head(sort(sumchildresidtries),ITER*BEST),sumchildresidtries)]), max(childparam1tries[match(head(sort(sumchildresidtries),ITER*BEST),sumchildresidtries)]))
+childparam2tries<-runif(ITER,min(childparam2tries[match(head(sort(sumchildresidtries),ITER*BEST),sumchildresidtries)]), max(childparam2tries[match(head(sort(sumchildresidtries),ITER*BEST),sumchildresidtries)]))
+childparamtries<-data.frame(sumchildresidtries=sumchildresidtries,childparam1tries=childparam1tries,childparam2tries=childparam2tries)
+return(c(step3tries,childparamtries))
+}
+step3firstpass<-step3triesfit(childparam1tries,childparam2tries)
+step3repeatpass<-step3triesfit(step3firstpass$childparam1tries,step3firstpass$childparam2tries)
+while (abs(max(step3repeatpass$sumchildresidtries)-min(step3repeatpass$sumchildresidtries))>FITTO)
+{step3repeatpass<-step3triesfit(step3repeatpass$childparam1tries,step3repeatpass$childparam2tries)
+}
+step3repeatpass$childparam1tries[1]
+step3repeatpass$childparam2tries[1]
+step3repeatpass$sumchildresidtries[1]
+step3best<-array(step1-step2,dim=c(length(step1)))
+step3best[1:SIZE]<-step3repeatpass$childparam1tries[1]*exp(-step3repeatpass$childparam2tries[1]*(meanages[]))
+step3<-step2+step3best
 
 ##STEP 4 FIT - SELECT BEST PERCENT PARAMETER VALUES OF ITER BASED ON INPUT DISTRIBUTIONS, THEN REPEAT ITER WITH THE UNIFORM BOUNDS OF BEST PERCENT UNTIL CONVERGENCE  
 step4triesfit<-function(labparam1tries,labparam2tries,labparam3tries,labparam4tries){

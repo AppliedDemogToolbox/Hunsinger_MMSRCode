@@ -172,7 +172,6 @@ for (i in 1:length(migprob)) {step1[i]<-migprob[i]/sum(migprob)}
 step2<-array(,length(step1))
 for (i in 1:length(step2)) {if(step1[i] != 0){step2[i]<-step1[i]}}
 step2<-array(mean(sort(step2)[1:level]),length(step2))
-ages<-c(0:(length(step1)-1))
 meanages<-c(0+1:length(step1))
 
 ##STEP 3 FIT - SLOPE AND INTERCEPT FOR TRANSFORMATION
@@ -182,7 +181,7 @@ meanages<-c(0+1:length(step1))
 #meanchildmin<-childmin+1
 #childages<-c(childmin+1:childmax)
 #childfit<-lm(step3~childages)
-#for (i in 1:length(ages)) {step3[i]<-exp(childfit$coefficients[1])*exp(-(-childfit$coefficients[2])*meanages[i])}
+#for (i in 1:length(meanages)) {step3[i]<-exp(childfit$coefficients[1])*exp(-(-childfit$coefficients[2])*meanages[i])}
 #step3<-step2+step3
 
 ##STEP 3 FIT - SELECT BEST PERCENT PARAMETER VALUES OF TRIES BASED ON INPUT DISTRIBUTIONS, THEN REPEAT TRIES WITH THE UNIFORM BOUNDS OF BEST PERCENT AND SELECT BEST PARAMETER VALUES 

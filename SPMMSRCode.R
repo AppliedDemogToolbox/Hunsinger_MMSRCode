@@ -198,15 +198,17 @@ childparam2tries<-runif(ITER,min(childparam2tries[match(head(sort(sumchildresidt
 childparamtries<-data.frame(sumchildresidtries=sumchildresidtries,childparam1tries=childparam1tries,childparam2tries=childparam2tries)
 return(c(step3tries,childparamtries))
 }
-step3firstpass<-step3triesfit(childparam1tries,childparam2tries)
-step3repeatpass<-step3triesfit(step3firstpass$childparam1tries,step3firstpass$childparam2tries)
-while (abs(max(step3repeatpass$sumchildresidtries)-min(step3repeatpass$sumchildresidtries))>FITTO)
+step3repeatpass<-step3triesfit(childparam1tries,childparam2tries)
+REPEAT<-0
+while (abs(max(step3repeatpass$childparam2tries)-min(step3repeatpass$childparam2tries))>FITTO)
 {step3repeatpass<-step3triesfit(step3repeatpass$childparam1tries,step3repeatpass$childparam2tries)
+REPEAT=REPEAT+1
 }
 step3repeatpass$childparam1tries[1]
 step3repeatpass$childparam2tries[1]
 step3repeatpass$sumchildresidtries[1]
 step3best<-array(step1-step2,dim=c(length(step1)))
+REPEAT
 step3best[1:SIZE]<-step3repeatpass$childparam1tries[1]*exp(-step3repeatpass$childparam2tries[1]*(meanages[]))
 step3<-step2+step3best
 
@@ -225,16 +227,18 @@ labparam4tries<-runif(ITER,min(labparam4tries[match(head(sort(sumlabresidtries),
 labparamtries<-data.frame(sumlabresidtries=sumlabresidtries,labparam1tries=labparam1tries,labparam2tries=labparam2tries,labparam3tries=labparam3tries,labparam4tries=labparam4tries)
 return(c(step4tries,labparamtries))
 }
-step4firstpass<-step4triesfit(labparam1tries,labparam2tries,labparam3tries,labparam4tries)
-step4repeatpass<-step4triesfit(step4firstpass$labparam1tries,step4firstpass$labparam2tries,step4firstpass$labparam3tries,step4firstpass$labparam4tries)
-while (abs(max(step4repeatpass$sumlabresidtries)-min(step4repeatpass$sumlabresidtries))>FITTO)
+step4repeatpass<-step4triesfit(labparam1tries,labparam2tries,labparam3tries,labparam4tries)
+REPEAT<-0
+while (abs(max(step4repeatpass$labparam2tries)-min(step4repeatpass$labparam2tries))>FITTO)
 {step4repeatpass<-step4triesfit(step4repeatpass$labparam1tries,step4repeatpass$labparam2tries,step4repeatpass$labparam3tries,step4repeatpass$labparam4tries)
+REPEAT=REPEAT+1
 }
 step4repeatpass$labparam1tries[1]
 step4repeatpass$labparam2tries[1]
 step4repeatpass$labparam3tries[1]
 step4repeatpass$labparam4tries[1]
 step4repeatpass$sumlabresidtries[1]
+REPEAT
 step4best<-array(step1-step3,dim=c(length(step1)))
 step4best[1:SIZE]<-step4repeatpass$labparam1tries[1]*exp(-step4repeatpass$labparam2tries[1]*(meanages[]-step4repeatpass$labparam3tries[1])-exp(-step4repeatpass$labparam4tries[1]*(meanages[]-step4repeatpass$labparam3tries[1])))
 step4<-step3+step4best
@@ -253,15 +257,17 @@ retparam3tries<-runif(ITER,min(retparam3tries[match(head(sort(sumretresidtries),
 retparamtries<-data.frame(sumretresidtries=sumretresidtries,retparam1tries=retparam1tries,retparam2tries=retparam2tries,retparam3tries=retparam3tries)
 return(c(step5tries,retparamtries))
 }
-step5firstpass<-step5triesfit(retparam1tries,retparam2tries,retparam3tries)
-step5repeatpass<-step5triesfit(step5firstpass$retparam1tries,step5firstpass$retparam2tries,step5firstpass$retparam3tries)
-while (abs(max(step5repeatpass$sumretresidtries)-min(step5repeatpass$sumretresidtries))>FITTO)
+step5repeatpass<-step5triesfit(retparam1tries,retparam2tries,retparam3tries)
+REPEAT<-0
+while (abs(max(step5repeatpass$retparam2tries)-min(step5repeatpass$retparam2tries))>FITTO)
 {step5repeatpass<-step5triesfit(step5repeatpass$retparam1tries,step5repeatpass$retparam2tries,step5repeatpass$retparam3tries)
+REPEAT=REPEAT+1
 }
 step5repeatpass$retparam1tries[1]
 step5repeatpass$retparam2tries[1]
 step5repeatpass$retparam3tries[1]
 step5repeatpass$sumretresidtries[1]
+REPEAT
 step5best<-array(step1-step4,dim=c(length(step1)))
 step5best[1:SIZE]<-step5repeatpass$retparam1tries[1]*exp(-((meanages[]-step5repeatpass$retparam3tries[1])/step5repeatpass$retparam2tries[1])*((meanages[]-step5repeatpass$retparam3tries[1])/step5repeatpass$retparam2tries[1]))
 step5<-step4+step5best
@@ -279,14 +285,16 @@ eldparam2tries<-runif(ITER,min(eldparam2tries[match(head(sort(sumeldresidtries),
 eldparamtries<-data.frame(sumeldresidtries=sumeldresidtries,eldparam1tries=eldparam1tries,eldparam2tries=eldparam2tries)
 return(c(step6tries,eldparamtries))
 }
-step6firstpass<-step6triesfit(eldparam1tries,eldparam2tries)
-step6repeatpass<-step6triesfit(step6firstpass$eldparam1tries,step6firstpass$eldparam2tries)
-while (abs(max(step6repeatpass$sumeldresidtries)-min(step6repeatpass$sumeldresidtries))>FITTO)
+step6repeatpass<-step6triesfit(eldparam1tries,eldparam2tries)
+REPEAT<-0
+while (abs(max(step6repeatpass$eldparam2tries)-min(step6repeatpass$eldparam2tries))>FITTO)
 {step6repeatpass<-step6triesfit(step6repeatpass$eldparam1tries,step6repeatpass$eldparam2tries)
+REPEAT=REPEAT+1
 }
 step6repeatpass$eldparam1tries[1]
 step6repeatpass$eldparam2tries[1]
 step6repeatpass$sumeldresidtries[1]
+REPEAT
 step6best<-array(step1-step5,dim=c(length(step1)))
 step6best[1:SIZE]<-step6repeatpass$eldparam1tries[1]*exp(step6repeatpass$eldparam2tries[1]*meanages[])
 step6<-step5+step6best
@@ -306,16 +314,18 @@ stuparam4tries<-runif(ITER,min(stuparam4tries[match(head(sort(sumsturesidtries),
 stuparamtries<-data.frame(sumsturesidtries=sumsturesidtries,stuparam1tries=stuparam1tries,stuparam2tries=stuparam2tries,stuparam3tries=stuparam3tries,stuparam4tries=stuparam4tries)
 return(c(step7tries,stuparamtries))
 }
-step7firstpass<-step7triesfit(stuparam1tries,stuparam2tries,stuparam3tries,stuparam4tries)
 step7repeatpass<-step7triesfit(step7firstpass$stuparam1tries,step7firstpass$stuparam2tries,step7firstpass$stuparam3tries,step7firstpass$stuparam4tries)
-while (abs(max(step7repeatpass$sumsturesidtries)-min(step7repeatpass$sumsturesidtries))>FITTO)
+REPEAT<-0
+while (abs(max(step7repeatpass$stuparam2tries)-min(step7repeatpass$stuparam2tries))>FITTO)
 {step7repeatpass<-step7triesfit(step7repeatpass$stuparam1tries,step7repeatpass$stuparam2tries,step7repeatpass$stuparam3tries,step7repeatpass$stuparam4tries)
+REPEAT=REPEAT+1
 }
 step7repeatpass$stuparam1tries[1]
 step7repeatpass$stuparam2tries[1]
 step7repeatpass$stuparam3tries[1]
 step7repeatpass$stuparam4tries[1]
 step7repeatpass$sumsturesidtries[1]
+REPEAT
 step7best<-array(step1-step6,dim=c(length(step1)))
 step7best[1:SIZE]<-step7repeatpass$stuparam1tries[i]*exp(-step7repeatpass$stuparam2tries[i]*(meanages[]-step7repeatpass$stuparam3tries[i])-exp(-step7repeatpass$stuparam4tries[i]*(meanages[]-step7repeatpass$stuparam3tries[i])))
 step7<-step6+step7best

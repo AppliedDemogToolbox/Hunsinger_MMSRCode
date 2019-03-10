@@ -1,5 +1,5 @@
 ##############################################################################################################################
-##EDDIE'S R CODE FOR FITTING THE MODEL MIGRATION SCHEDULE WITH STUDENT PEAK
+##EDDIE'S R CODE FOR FITTING THE MULTI-EXPONENTIAL MODEL MIGRATION SCHEDULE WITH STUDENT PEAK
 ##
 ##EDDIE HUNSINGER, AUGUST 2018 (LAST UPDATED MARCH 2019)
 ##http://www.demog.berkeley.edu/~eddieh/

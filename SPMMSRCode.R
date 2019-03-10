@@ -1,7 +1,7 @@
 ##############################################################################################################################
 ##EDDIE'S R CODE FOR FITTING THE MODEL MIGRATION SCHEDULE WITH STUDENT PEAK
 ##
-##EDDIE HUNSINGER, AUGUST 2018 (LAST UPDATED DECEMBER 2018)
+##EDDIE HUNSINGER, AUGUST 2018 (LAST UPDATED MARCH 2019)
 ##http://www.demog.berkeley.edu/~eddieh/
 ##
 ##IF YOU WOULD LIKE TO USE, SHARE OR REPRODUCE THIS CODE, BE SURE TO CITE THE SOURCE
@@ -133,7 +133,7 @@ eldparam1tries<-array(runif(TRIES,0,.000005)) #eldparam1tries<-array(runif(TRIES
 
 #RATE OF ASCENT OF THE ELDERLY CURVE
 #TO APPROXIMATELY EXCLUDE ELDERLY CURVE FROM MODEL CAN SET LOW AS '0' AND HIGH AS '1e-10'
-eldparam2tries<-array(runif(TRIES,0,.1)) #eldparam2tries<-array(runif(TRIES,0,1e-10))
+eldparam2tries<-array(runif(TRIES,.05,.1)) #eldparam2tries<-array(runif(TRIES,0,1e-10))
 ###############
 
 ###############
@@ -144,7 +144,7 @@ stumax<-max(studentages+1)
 
 #HEIGHT OF STUDENT CURVE
 #TO APPROXIMATELY EXCLUDE STUDENT CURVE FROM MODEL CAN SET LOW AS '0' AND HIGH AS '1e-10'
-stuparam1tries<-array(runif(TRIES,.00001,.1)) #stuparam1tries<-array((runif(TRIES,0,1e-10)))
+stuparam1tries<-array(runif(TRIES,.001,.1)) #stuparam1tries<-array((runif(TRIES,0,1e-10)))
 
 #RATE OF DESCENT OF STUDENT CURVE
 #TO APPROXIMATELY EXCLUDE STUDENT CURVE FROM MODEL CAN SET LOW AS '0' AND HIGH AS '1e-10'
@@ -199,7 +199,8 @@ return(c(step3tries,childparamtries))
 }
 step3repeatpass<-step3triesfit(childparam1tries,childparam2tries)
 ITER<-0
-while (abs(max(step3repeatpass$childparam2tries)-min(step3repeatpass$childparam2tries))>FITTO)
+while (abs(max(step3repeatpass$childparam1tries)-min(step3repeatpass$childparam1tries))>FITTO & 
+abs(max(step3repeatpass$childparam2tries)-min(step3repeatpass$childparam2tries))>FITTO)
 {step3repeatpass<-step3triesfit(step3repeatpass$childparam1tries,step3repeatpass$childparam2tries)
 ITER=ITER+1
 }
@@ -228,7 +229,11 @@ return(c(step4tries,labparamtries))
 }
 step4repeatpass<-step4triesfit(labparam1tries,labparam2tries,labparam3tries,labparam4tries)
 ITER<-0
-while (abs(max(step4repeatpass$labparam2tries)-min(step4repeatpass$labparam2tries))>FITTO)
+while (abs(max(step4repeatpass$labparam1tries)-min(step4repeatpass$labparam1tries))>FITTO & 
+abs(max(step4repeatpass$labparam2tries)-min(step4repeatpass$labparam2tries))>FITTO &
+abs(max(step4repeatpass$labparam3tries)-min(step4repeatpass$labparam3tries))>FITTO &
+abs(max(step4repeatpass$labparam4tries)-min(step4repeatpass$labparam4tries))>FITTO
+)
 {step4repeatpass<-step4triesfit(step4repeatpass$labparam1tries,step4repeatpass$labparam2tries,step4repeatpass$labparam3tries,step4repeatpass$labparam4tries)
 ITER=ITER+1
 }
@@ -286,7 +291,9 @@ return(c(step6tries,eldparamtries))
 }
 step6repeatpass<-step6triesfit(eldparam1tries,eldparam2tries)
 ITER<-0
-while (abs(max(step6repeatpass$eldparam2tries)-min(step6repeatpass$eldparam2tries))>FITTO)
+while (abs(max(step6repeatpass$eldparam1tries)-min(step6repeatpass$eldparam1tries))>FITTO &
+abs(max(step6repeatpass$eldparam2tries)-min(step6repeatpass$eldparam2tries))>FITTO
+)
 {step6repeatpass<-step6triesfit(step6repeatpass$eldparam1tries,step6repeatpass$eldparam2tries)
 ITER=ITER+1
 }
@@ -315,7 +322,11 @@ return(c(step7tries,stuparamtries))
 }
 step7repeatpass<-step7triesfit(stuparam1tries,stuparam2tries,stuparam3tries,stuparam4tries)
 ITER<-0
-while (abs(max(step7repeatpass$stuparam2tries)-min(step7repeatpass$stuparam2tries))>FITTO)
+while (abs(max(step7repeatpass$stuparam1tries)-min(step7repeatpass$stuparam1tries))>FITTO &
+abs(max(step7repeatpass$stuparam2tries)-min(step7repeatpass$stuparam2tries))>FITTO &
+abs(max(step7repeatpass$stuparam3tries)-min(step7repeatpass$stuparam3tries))>FITTO &
+abs(max(step7repeatpass$stuparam4tries)-min(step7repeatpass$stuparam4tries))>FITTO
+)
 {step7repeatpass<-step7triesfit(step7repeatpass$stuparam1tries,step7repeatpass$stuparam2tries,step7repeatpass$stuparam3tries,step7repeatpass$stuparam4tries)
 ITER=ITER+1
 }
@@ -366,4 +377,3 @@ squaredsumoffullmodelresiduals
 ##############################
 
 #write.table(###, file="G:/###/###.csv", sep=",")
-

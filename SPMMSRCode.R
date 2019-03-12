@@ -125,7 +125,7 @@ retparam3tries<-array(runif(TRIES,55,65)) #retparam1tries<-array(runif(TRIES,55,
 ##STEP 6 INPUTS
 #MIN AND MAX OF ELDERLY AGES TO FIT OVER
 eldmin<-70
-eldmax<-84
+eldmax<-99
 
 #HEIGHT OF THE ELDERLY CURVE
 #TO EXCLUDE ELDERLY CURVE FROM MODEL CAN SET LOW AS '0' AND HIGH AS '1e-10'

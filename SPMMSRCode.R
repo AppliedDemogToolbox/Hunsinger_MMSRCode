@@ -200,7 +200,8 @@ return(c(step3tries,childparamtries))
 step3repeatpass<-step3triesfit(childparam1tries,childparam2tries)
 ITER<-0
 while (abs(max(step3repeatpass$childparam1tries)-min(step3repeatpass$childparam1tries))>FITTO & 
-abs(max(step3repeatpass$childparam2tries)-min(step3repeatpass$childparam2tries))>FITTO)
+abs(max(step3repeatpass$childparam2tries)-min(step3repeatpass$childparam2tries))>FITTO
+)
 {step3repeatpass<-step3triesfit(step3repeatpass$childparam1tries,step3repeatpass$childparam2tries)
 ITER=ITER+1
 }
@@ -263,7 +264,10 @@ return(c(step5tries,retparamtries))
 }
 step5repeatpass<-step5triesfit(retparam1tries,retparam2tries,retparam3tries)
 ITER<-0
-while (abs(max(step5repeatpass$retparam2tries)-min(step5repeatpass$retparam2tries))>FITTO)
+while (abs(max(step5repeatpass$retparam1tries)-min(step5repeatpass$retparam1tries))>FITTO & 
+abs(max(step5repeatpass$retparam2tries)-min(step5repeatpass$retparam2tries))>FITTO & 
+abs(max(step5repeatpass$retparam3tries)-min(step5repeatpass$retparam3tries))>FITTO  
+)
 {step5repeatpass<-step5triesfit(step5repeatpass$retparam1tries,step5repeatpass$retparam2tries,step5repeatpass$retparam3tries)
 ITER=ITER+1
 }

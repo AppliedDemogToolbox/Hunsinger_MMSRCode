@@ -4,7 +4,7 @@
 ##FOR MORE INFO, SEE https://raw.githubusercontent.com/AppliedDemogToolbox/Hunsinger_SPMMSRCode/master/SPMMSRCode.R
 ##via https://applieddemogtoolbox.github.io/Toolbox/#SPMMSRCode
 ##
-##EDDIE HUNSINGER, OCTOBER 2018 (UPDATED APRIL 2018)
+##EDDIE HUNSINGER, OCTOBER 2018 (UPDATED APRIL 2019)
 ##http://www.demog.berkeley.edu/~eddieh/
 ##
 ##IF YOU WOULD LIKE TO USE, SHARE OR REPRODUCE THIS CODE, BE SURE TO CITE THE SOURCE

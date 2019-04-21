@@ -56,8 +56,8 @@ childmax<-16
 labormin<-17
 labormax<-45
 
-#STUDENT AGES TO EXCLUDE - CURRENTLY MUST BE ADJACENT AGES - TO EXCLUDE STUDENT PEAK FROM MODEL CAN SET AS JUST 'c(1,1)'
-studentages<-c(18,19)#studentages<-c(1,1)
+#STUDENT AGES TO EXCLUDE
+studentages<-c(18,19)
 
 #HEIGHT OF THE LABOR FORCE CURVE
 labparam1tries<-.05

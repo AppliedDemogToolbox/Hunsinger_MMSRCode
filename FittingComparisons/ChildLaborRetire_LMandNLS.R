@@ -4,7 +4,7 @@
 ##FOR MORE INFO, SEE https://raw.githubusercontent.com/AppliedDemogToolbox/Hunsinger_SPMMSRCode/master/SPMMSRCode.R
 ##via https://applieddemogtoolbox.github.io/Toolbox/#SPMMSRCode
 ##
-##EDDIE HUNSINGER, OCTOBER 2018 (UPDATED DECEMBER 2018)
+##EDDIE HUNSINGER, OCTOBER 2018 (UPDATED APRIL 2019)
 ##http://www.demog.berkeley.edu/~eddieh/
 ##
 ##IF YOU WOULD LIKE TO USE, SHARE OR REPRODUCE THIS CODE, BE SURE TO CITE THE SOURCE
@@ -30,15 +30,6 @@ migprob<-(SPMMSTestingData$Migration.probability[1:90])
 
 #SIZE OF migprob (DATA BY AGE) USED
 SIZE<-90
-
-#NUMBER OF ITERATIONS - USED FOR FITTING
-ITER<-10000
-
-#PROPORTION TO REPEAT DISTRIBUTION BOUND SELECTION WITH
-BEST<-.015
-
-#CONVERGENCE INDEX
-FITTO<-1e-10
 ###############
 
 ###############

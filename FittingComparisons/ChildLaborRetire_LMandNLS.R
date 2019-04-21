@@ -194,3 +194,4 @@ squaredsumoffullmodelresiduals
 ##############################
 
 #write.table(###, file="G:/###/###.csv", sep=",")
+

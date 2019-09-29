@@ -30,6 +30,10 @@
 ##GREAT RESOURCE ON THE ROGERS-CASTRO MODEL: Rogers A & Castro LJ (1981). Model Migration Schedules. IIASA Research Report. IIASA, Laxenburg, Austria: RR-81-030
 ##AVAILABLE ONLINE: http://pure.iiasa.ac.at/id/eprint/1543/
 ##
+##R PACKAGE (DEVELOPED MONTHS BEFORE THIS CODE) THAT ALSO USES UNIFORM DISTRIBUTIONS FOR THE PARAMETER STARTING POINTS:
+##migraR by J. Sebastian Ruiz-Santacruz and Jackson Garcés Hernández
+##AVAILABLE ONLINE: https://github.com/elflacosebas/migraR
+##
 ##This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. More information: https://creativecommons.org/licenses/by-nc-sa/4.0/? 
 ##############################################################################################################################
 

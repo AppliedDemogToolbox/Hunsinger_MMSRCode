@@ -1,7 +1,7 @@
 ##############################################################################################################################
 ##EDDIE'S R CODE FOR FITTING THE MULTI-EXPONENTIAL MODEL MIGRATION SCHEDULE WITH STUDENT PEAK
 ##
-##EDDIE HUNSINGER, AUGUST 2018 (LAST UPDATED MARCH 2019)
+##EDDIE HUNSINGER, AUGUST 2018 (LAST UPDATED OCTOBER 2019)
 ##http://www.demog.berkeley.edu/~eddieh/
 ##
 ##IF YOU WOULD LIKE TO USE, SHARE OR REPRODUCE THIS CODE, BE SURE TO CITE THE SOURCE
@@ -34,7 +34,7 @@
 ##migraR by J. Sebastian Ruiz-Santacruz and Jackson Garcés Hernández
 ##AVAILABLE ONLINE: https://github.com/elflacosebas/migraR
 ##
-##This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License. More information: https://creativecommons.org/licenses/by-nc-sa/4.0/? 
+##This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 International License. More information: https://creativecommons.org/licenses/by-sa/3.0/? 
 ##############################################################################################################################
 
 

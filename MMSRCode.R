@@ -48,8 +48,8 @@
 
 ###############
 #DATA FROM WILSON (2010)
-SPMMSTestingData<-read.table(file="https://github.com/AppliedDemogToolbox/Hunsinger_MMSRCode/raw/master/MMSData.csv",header=TRUE,sep=",")
-migprob<-(SPMMSTestingData$Migration.intensity[1:105])
+MMSTestingData<-read.table(file="https://github.com/AppliedDemogToolbox/Hunsinger_MMSRCode/raw/master/MMSData.csv",header=TRUE,sep=",")
+migprob<-(MMSTestingData$Migration.intensity[1:105])
 
 #SIZE OF migprob (DATA BY AGE) USED
 SIZE<-90

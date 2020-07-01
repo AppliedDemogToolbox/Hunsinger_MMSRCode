@@ -47,7 +47,7 @@
 ##############################
 
 ###############
-#DATA FROM WILSON (2010)
+#DATA FROM WILSON (2020)
 MMSTestingData<-read.table(file="https://github.com/AppliedDemogToolbox/Hunsinger_MMSRCode/raw/master/MMSData.csv",header=TRUE,sep=",")
 migprob<-(MMSTestingData$Migration.intensity[1:105])
 

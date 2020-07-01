@@ -1,7 +1,7 @@
 ##############################################################################################################################
 ##EDDIE'S R CODE FOR FITTING THE MULTI-EXPONENTIAL MODEL MIGRATION SCHEDULE
 ##
-##EDDIE HUNSINGER, AUGUST 2018 (LAST UPDATED JUNE 2020, AND RENAMED FROM SPMMSRCode.R IN JUNE 2020)
+##EDDIE HUNSINGER, AUGUST 2018 (LAST UPDATED JULY 2020)
 ##http://www.demog.berkeley.edu/~eddieh/
 ##
 ##IF YOU WOULD LIKE TO USE, SHARE OR REPRODUCE THIS CODE, BE SURE TO CITE THE SOURCE
@@ -100,7 +100,7 @@ studentages<-c(18,19) #studentages<-c(0)
 labparam1tries<-array(runif(TRIES,.04,.08))
 
 #RATE OF DESCENT OF THE LABOR FORCE CURVE
-labparam2tries<-array(runif(TRIES,.06,.10))
+labparam2tries<-array(runif(TRIES,.08,.12))
 
 #POSITION OF THE LABOR FORCE CURVE ON THE AGE-AXIS
 labparam3tries<-array(runif(TRIES,20,23))
@@ -121,7 +121,7 @@ retparam1tries<-array(runif(TRIES,.0,.01)) #retparam1tries<-array(runif(TRIES,0,
 
 #RATE OF DESCENT OF RETIREMENT CURVE
 #TO APPROXIMATELY EXCLUDE RETIREMENT CURVE FROM MODEL CAN SET LOW AS '0' AND HIGH AS '1e-10'
-retparam2tries<-array(runif(TRIES,2.5,10)) #retparam2tries<-array(runif(TRIES,0,1e-10))
+retparam2tries<-array(runif(TRIES,5,15)) #retparam2tries<-array(runif(TRIES,0,1e-10))
 
 #POSITION OF THE RETIREMENT CURVE ON THE AGE-AXIS
 #TO APPROXIMATELY EXCLUDE RETIREMENT CURVE FROM MODEL CAN SET LOW AS '55' AND HIGH AS '55+1e-10'

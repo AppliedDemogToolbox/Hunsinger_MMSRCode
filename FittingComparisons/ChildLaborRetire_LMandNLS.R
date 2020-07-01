@@ -1,7 +1,7 @@
 ##############################################################################################################################
 ##EDDIE'S R CODE FOR FITTING THE MODEL MIGRATION SCHEDULE WITH STUDENT PEAK - COMPARISON CODE
 ##
-##FOR MORE INFO, SEE https://raw.githubusercontent.com/AppliedDemogToolbox/Hunsinger_SPMMSRCode/master/SPMMSRCode.R
+##FOR MORE INFO, SEE https://raw.githubusercontent.com/AppliedDemogToolbox/Hunsinger_MMSRCode/master/SPMMSRCode.R
 ##via https://applieddemogtoolbox.github.io/Toolbox/#SPMMSRCode
 ##
 ##EDDIE HUNSINGER, OCTOBER 2018 (UPDATED APRIL 2019)
@@ -25,7 +25,7 @@
 
 ###############
 #DATA
-SPMMSTestingData<-read.table(file="https://github.com/AppliedDemogToolbox/Hunsinger_SPMMSRCode/raw/master/SPMMSData.csv",header=TRUE,sep=",")
+SPMMSTestingData<-read.table(file="https://github.com/AppliedDemogToolbox/Hunsinger_MMSRCode/raw/master/SPMMSData.csv",header=TRUE,sep=",")
 migprob<-(SPMMSTestingData$Migration.probability[1:90])
 
 #SIZE OF migprob (DATA BY AGE) USED

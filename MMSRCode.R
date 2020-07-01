@@ -52,7 +52,7 @@ MMSTestingData<-read.table(file="https://github.com/AppliedDemogToolbox/Hunsinge
 migprob<-(MMSTestingData$Migration.intensity[1:105])
 
 #SIZE OF migprob (DATA BY AGE) USED
-SIZE<-90
+SIZE<-105
 
 #NUMBER OF TRIES - USED FOR FITTING
 TRIES<-1000

@@ -61,6 +61,9 @@ BEST<-.015
 
 #CONVERGENCE INDEX
 FITTO<-1e-10
+
+##OPTION FOR FIXED RESULT (SET RANDOM NUMBER SELECTION)
+#set.seed(2573212)
 ###############
 
 ###############

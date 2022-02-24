@@ -65,6 +65,9 @@ FITTO<-1e-10
 
 ##OPTION FOR FIXED RESULT (SET SEED OF RANDOM NUMBER GENERATOR)
 #set.seed(2573212)
+
+#FIT RETIREMENT AND ELDERLY FUNCTIONS TOGETHER (COMBINED AGE RANGE)?
+COMBINERETIREELD<-"YES"
 ###############
 
 ###############
@@ -263,6 +266,7 @@ step4best<-array(step1-step3,dim=c(length(step1)))
 step4best[1:SIZE]<-step4repeatpass$labparam1tries[1]*exp(-step4repeatpass$labparam2tries[1]*(meanages[]-step4repeatpass$labparam3tries[1])-exp(-step4repeatpass$labparam4tries[1]*(meanages[]-step4repeatpass$labparam3tries[1])))
 step4<-step3+step4best
 
+if (COMBINERETIREELD=="NO") {
 ##STEP 5 FIT - SELECT BEST PERCENT PARAMETER VALUES OF TRIES BASED ON INPUT DISTRIBUTIONS, THEN REPEAT TRIES WITH THE UNIFORM BOUNDS OF BEST PERCENT UNTIL CONVERGENCE   
 step5triesfit<-function(retparam1tries,retparam2tries,retparam3tries){
 step5tries<-array(step1-step2,dim=c(length(step1),TRIES))
@@ -326,6 +330,56 @@ ITER
 step6best<-array(step1-step4,dim=c(length(step1)))
 step6best[1:SIZE]<-step6repeatpass$eldparam1tries[1]*exp(-((meanages[]-step6repeatpass$eldparam3tries[1])/step6repeatpass$eldparam2tries[1])*((meanages[]-step6repeatpass$eldparam3tries[1])/step6repeatpass$eldparam2tries[1]))
 step6<-step5+step6best
+}
+
+if (COMBINERETIREELD=="YES") {
+##STEP 5 FIT - SELECT BEST PERCENT PARAMETER VALUES OF TRIES BASED ON INPUT DISTRIBUTIONS, THEN REPEAT TRIES WITH THE UNIFORM BOUNDS OF BEST PERCENT UNTIL CONVERGENCE   
+step5triesfit<-function(retparam1tries,retparam2tries,retparam3tries,eldparam1tries,eldparam2tries,eldparam3tries){
+step5tries<-array(step1-step2,dim=c(length(step1),TRIES))
+for (i in 1:TRIES) {step5tries[1:SIZE,i]<-retparam1tries[i]*exp(-((meanages[]-retparam3tries[i])/retparam2tries[i])*((meanages[]-retparam3tries[i])/retparam2tries[i]))}
+step6tries<-array(step1-step2,dim=c(length(step1),TRIES))
+for (i in 1:TRIES) {step6tries[1:SIZE,i]<-eldparam1tries[i]*exp(-((meanages[]-eldparam3tries[i])/eldparam2tries[i])*((meanages[]-eldparam3tries[i])/eldparam2tries[i]))}
+step5tries<-step5tries+step6tries
+retresidtries<-array(0,dim=c(length(step1),TRIES))
+for (i in 1:TRIES) {for (j in 1:length(meanages)) {if((meanages[j]>=retmin)&(meanages[j]<=eldmax)&((meanages[j]<min(studentages))|(meanages[j]>max(studentages)))) {retresidtries[j,i]<-(step5tries[j,i]-(step1-step4)[j])^2}}}
+sumretresidtries<-array(,TRIES)
+for (i in 1:TRIES) {sumretresidtries[i]<-sum(retresidtries[,i])}
+retparam1tries<-runif(TRIES,min(retparam1tries[match(head(sort(sumretresidtries),TRIES*BEST),sumretresidtries)]),max(retparam1tries[match(head(sort(sumretresidtries),TRIES*BEST),sumretresidtries)]))
+retparam2tries<-runif(TRIES,min(retparam2tries[match(head(sort(sumretresidtries),TRIES*BEST),sumretresidtries)]),max(retparam2tries[match(head(sort(sumretresidtries),TRIES*BEST),sumretresidtries)]))
+retparam3tries<-runif(TRIES,min(retparam3tries[match(head(sort(sumretresidtries),TRIES*BEST),sumretresidtries)]),max(retparam3tries[match(head(sort(sumretresidtries),TRIES*BEST),sumretresidtries)]))
+retparamtries<-data.frame(sumretresidtries=sumretresidtries,retparam1tries=retparam1tries,retparam2tries=retparam2tries,retparam3tries=retparam3tries)
+eldparam1tries<-runif(TRIES,min(eldparam1tries[match(head(sort(sumretresidtries),TRIES*BEST),sumretresidtries)]),max(eldparam1tries[match(head(sort(sumretresidtries),TRIES*BEST),sumretresidtries)]))
+eldparam2tries<-runif(TRIES,min(eldparam2tries[match(head(sort(sumretresidtries),TRIES*BEST),sumretresidtries)]),max(eldparam2tries[match(head(sort(sumretresidtries),TRIES*BEST),sumretresidtries)]))
+eldparam3tries<-runif(TRIES,min(eldparam3tries[match(head(sort(sumretresidtries),TRIES*BEST),sumretresidtries)]),max(eldparam3tries[match(head(sort(sumretresidtries),TRIES*BEST),sumretresidtries)]))
+eldparamtries<-data.frame(sumeldresidtries=sumretresidtries,eldparam1tries=eldparam1tries,eldparam2tries=eldparam2tries,eldparam3tries=eldparam3tries)
+return(c(step5tries,retparamtries,eldparamtries))
+}
+step5repeatpass<-step5triesfit(retparam1tries,retparam2tries,retparam3tries,eldparam1tries,eldparam2tries,eldparam3tries)
+ITER<-0
+while (abs(max(step5repeatpass$retparam1tries)-min(step5repeatpass$retparam1tries))>FITTO & 
+abs(max(step5repeatpass$retparam2tries)-min(step5repeatpass$retparam2tries))>FITTO & 
+abs(max(step5repeatpass$retparam3tries)-min(step5repeatpass$retparam3tries))>FITTO  
+)
+{step5repeatpass<-step5triesfit(step5repeatpass$retparam1tries,step5repeatpass$retparam2tries,step5repeatpass$retparam3tries,step5repeatpass$eldparam1tries,step5repeatpass$eldparam2tries,step5repeatpass$eldparam3tries)
+ITER=ITER+1
+}
+step5repeatpass$retparam1tries[1]
+step5repeatpass$retparam2tries[1]
+step5repeatpass$retparam3tries[1]
+step5repeatpass$sumretresidtries[1]
+step5repeatpass$eldparam1tries[1]
+step5repeatpass$eldparam2tries[1]
+step5repeatpass$eldparam3tries[1]
+step5repeatpass$sumeldresidtries[1]
+step6repeatpass<-step5repeatpass
+ITER
+step5best<-array(step1-step4,dim=c(length(step1)))
+step5best[1:SIZE]<-step5repeatpass$retparam1tries[1]*exp(-((meanages[]-step5repeatpass$retparam3tries[1])/step5repeatpass$retparam2tries[1])*((meanages[]-step5repeatpass$retparam3tries[1])/step5repeatpass$retparam2tries[1]))
+step5<-step4+step5best
+step6best<-array(step1-step5,dim=c(length(step1)))
+step6best[1:SIZE]<-step5repeatpass$eldparam1tries[1]*exp(-((meanages[]-step5repeatpass$eldparam3tries[1])/step5repeatpass$eldparam2tries[1])*((meanages[]-step5repeatpass$eldparam3tries[1])/step5repeatpass$eldparam2tries[1]))
+step6<-step5+step6best
+}
 
 ##STEP 7 FIT - SELECT BEST PERCENT PARAMETER VALUES OF TRIES BASED ON INPUT DISTRIBUTIONS, THEN REPEAT TRIES WITH THE UNIFORM BOUNDS OF BEST PERCENT UNTIL CONVERGENCE  
 step7triesfit<-function(stuparam1tries,stuparam2tries,stuparam3tries,stuparam4tries){

@@ -1,7 +1,7 @@
 ##############################################################################################################################
 ##EDDIE'S R CODE FOR FITTING THE MULTI-EXPONENTIAL MODEL MIGRATION SCHEDULE
 ##
-##EDDIE HUNSINGER, AUGUST 2018 (LAST UPDATED JULY 2020)
+##EDDIE HUNSINGER, AUGUST 2018 (LAST UPDATED FEBRUARY 2022)
 ##http://www.demog.berkeley.edu/~eddieh/
 ##
 ##IF YOU WOULD LIKE TO USE, SHARE OR REPRODUCE THIS CODE, BE SURE TO CITE THE SOURCE
